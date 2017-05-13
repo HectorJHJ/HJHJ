@@ -120,6 +120,7 @@ traceOfHail = []
 noSnow = []
 highestSnowfall = 0
 highest = []
+snowToPlay = []
 # Holds snowfall data with T replace with 2.7 so it can be shown on a graph
 snowfall2 = []
 # Holds snowfall data with T replace with 0 to calculate average snowfall
@@ -147,7 +148,11 @@ for n in range(111,len(snowfall)):
             if snowfall[x] != 'T ':
                 if float(snowfall[x]) == highestSnowfall: 
                     highest.append(season[x])
+                if float(snowfall[x]) >= 4: 
+                    snowToPlay.append(season[x]) 
         print(highest)
+        print('Seasons with 4 or more inches of snow:')
+        print(snowToPlay)
 
 print('Most inches of snowfall in Central Park: {}'.format(max(snowfall3)))
 print('Average inches of snowfall in Central Park: {0:.2f}'.format(sum(snowfall3)/len(snowfall3)))
