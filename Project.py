@@ -103,11 +103,8 @@ p = open("monthlyseasonalsnowfall.csv")
 reader2 = csv.DictReader(p)
 
 snowfall = []
-season = []
-
 
 for row in reader2:
-         season.append(row['SEASON '])
          snowfall.append(row['DEC '])
       
 p.close()
@@ -120,15 +117,16 @@ traceOfHail = []
 noSnow = []
 highestSnowfall = 0
 highest = []
-snowToPlay = []
 # Holds snowfall data with T replace with 2.7 so it can be shown on a graph
 snowfall2 = []
 # Holds snowfall data with T replace with 0 to calculate average snowfall
 snowfall3 = []
+snowToPlay = []
 
 for n in range(111,len(snowfall)):
     if snowfall[n] == 'T ':
-        traceOfHail.append(season[n])
+        print(n)
+        traceOfHail.append((1980+(n-111)))
         snowfall2.append(2.7)
         snowfall3.append(0)
     else:
@@ -137,29 +135,31 @@ for n in range(111,len(snowfall)):
         if float(snowfall[n]) > highestSnowfall:
             highestSnowfall = float(snowfall[n])
     if snowfall[n] == '0':
-        noSnow.append(season[n])      
+        noSnow.append(1980+(n-111))      
     if n == len(snowfall)-1:
-        print('Seasons with only trace of hail:')
+        print('Years with only trace of hail:')
         print(traceOfHail)
-        print('Seasons with no snowfall:')
+        print('Years with no snowfall:')
         print(noSnow)
-        print('Seasons with the highest snowfall:')
+        print('Year with the highest snowfall:')
         for x in range(111,len(snowfall)):
             if snowfall[x] != 'T ':
                 if float(snowfall[x]) == highestSnowfall: 
-                    highest.append(season[x])
+                    highest.append(1980+(x-111))
                 if float(snowfall[x]) >= 4: 
-                    snowToPlay.append(season[x]) 
+                    snowToPlay.append(1980+(x-111))
         print(highest)
-        print('Seasons with 4 or more inches of snow:')
+        print('Years with 4 or more inches of snow:')
         print(snowToPlay)
+        
 
 print('Most inches of snowfall in Central Park: {}'.format(max(snowfall3)))
 print('Average inches of snowfall in Central Park: {0:.2f}'.format(sum(snowfall3)/len(snowfall3)))
 
-#print(season[111])
-x = np.arange(len(season))
-df = pd.DataFrame(snowfall2, index = season[111:])
+
+x = [n for n in range(1980,2017)]
+#df = pd.DataFrame(snowfall2, index = season[111:])
+df = pd.DataFrame(snowfall2, index = x)
 
 dfstacked = df.stack()
 mask = dfstacked == 2.7
