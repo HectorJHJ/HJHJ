@@ -125,7 +125,6 @@ snowToPlay = []
 
 for n in range(111,len(snowfall)):
     if snowfall[n] == 'T ':
-        print(n)
         traceOfHail.append((1980+(n-111)))
         snowfall2.append(2.7)
         snowfall3.append(0)
