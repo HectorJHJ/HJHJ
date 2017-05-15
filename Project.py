@@ -171,3 +171,16 @@ pliz.set_xlabel("Season", fontsize=20)
 pliz.set_ylabel("Inches of Snowfall", fontsize=20)
 HA = mpatches.Patch(color='m', label='Traces of Hail')
 pliz.legend(handles=[HA], loc=2)
+
+x = [n for n in range(1, 38)]
+orderSnowfall = sorted(snowfall3)
+plt.plot(x, orderSnowfall, "--b")
+plt.title("Inches of Snowfall Comparative to Years")
+plt.ylabel("Inches of Snowfall")
+plt.xlabel("Years")
+plt.axis([1, 37, -1, 22])
+plt.grid(True)
+plt.legend()
+plt.savefig('snowData2.png', format='png', dpi=100)
+plt.show()
+
